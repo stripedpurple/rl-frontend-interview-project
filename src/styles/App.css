@@ -1,0 +1,138 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+#root {
+  height: 100%;
+}
+
+.logger {
+  height: 100%;
+  overflow: hidden;
+  background-color: #e1e1e1;
+}
+.logger_header {
+  width: 300px;
+  padding: 40px 0;
+  margin: 0 auto;
+}
+.logger_header_overall {}
+.logger_header_snippet {
+  display: inline-block;
+  width: 50%;
+}
+.logger_body {
+  height: calc(100% - 193px);
+  padding: 25px 200px;
+  margin: 0 auto;
+  overflow: auto;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+}
+.logger_form {
+  box-sizing: border-box;
+  display: none;
+  position: absolute;
+    top: 0;
+    left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.logger_addNew {
+  width: 1.2em;
+  font-size: 3em;
+  position: absolute;
+    right: 75px;
+    bottom: 30px;
+  color: white;
+  background-color: black;
+  border-radius: 100px;
+  transition: background-color .2s, color .2s;
+  cursor: pointer;
+  border: none;
+}
+.logger_addNew:hover,
+.logger_addNew:focus {
+  color: black;
+  background-color: white;
+}
+
+
+.transaction {
+  padding: 5px 15px;
+  margin: 10px 0;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.transaction_amount {
+  float: right;
+}
+.transaction_label {
+  display: inline-block;
+}
+
+
+.total {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.total_amount {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+.total_label {}
+.total--bigger {
+  margin-bottom: 30px;
+}
+.total--bigger .total_amount {
+  font-size: 2em;
+}
+
+.toggle {
+  position: relative;
+  color: inherit;
+  background-color: transparent;
+  border-width: 0;
+  font-size: inherit;
+  cursor: inherit;
+  width: 100%;
+  height: 100%;
+}
+.toggle_content {
+  position: relative;
+    top: 50%;
+}
+
+.inputField {
+  display: block;
+}
+.inputField_label {
+  margin-bottom: 10px;
+}
+.inputField_value {
+  width: 100%;
+  padding: 10px;
+}
+
+.show {
+  display: block;
+}
+.pos {
+  color: #108d10;
+}
+.neg {
+  color: #cd1010;
+}
+
+.newTransactionForm_input {
+  display: block;
+  box-sizing: border-box;
+  margin: 20px 35px;
+}
