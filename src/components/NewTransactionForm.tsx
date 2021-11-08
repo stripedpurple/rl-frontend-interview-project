@@ -20,8 +20,6 @@ function NewTransactionForm() {
                 expense: expense
             }, function() {
                 alert('Transaction added.');
-                setDesc('');
-                setExpense(0.00);
             });
         }
         else {
