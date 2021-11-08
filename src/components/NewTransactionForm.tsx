@@ -34,7 +34,7 @@ function NewTransactionForm() {
             </div>
             <div className="newTransactionForm_input">
                 <InputField name='expense' label='Price' type='text' defaultValue={expense} required={true} callback={handleInputChange} validate={(value: any) => {
-                    if (value && isFinite(value)) {
+                    if (value && (isFinite(value) || value === '-')) {
                         let value_array = value.toString().split('.');
                         let decimals = value_array[1];
 
