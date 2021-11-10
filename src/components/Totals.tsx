@@ -9,15 +9,19 @@ type Props = OwnProps;
 
 const Totals: FunctionComponent<Props> = ({transactions}) => {
     const [aggregates, setAggregates] = useState({
-        total: '0',
-        spent: '0',
-        earned: '0'
+        total: '0.00',
+        spent: '0.00',
+        earned: '0.00'
     });
 
     useEffect(() => {
         if (transactions.length > 0) {
             let tmpTransaction = [...transactions]
-            let spent = tmpTransaction.filter(t => parseFloat(t.expense) < 0).map(t => parseFloat(t.expense)).reduce((sum, current) => (sum + current)).toFixed(2)
+            let spent = tmpTransaction
+                .filter(t => parseFloat(t.expense) < 0)
+                .map(t => parseFloat(t.expense))
+                .reduce((sum, current) => (sum + current))
+                .toFixed(2)
             let earned = tmpTransaction.filter(t => parseFloat(t.expense) > 0).map(t => parseFloat(t.expense)).reduce((sum, current) => (sum + current)).toFixed(2)
             let total = tmpTransaction.map(t => parseFloat(t.expense)).reduce((sum, current) => (sum + current)).toFixed(2)
 

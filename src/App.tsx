@@ -12,21 +12,35 @@ function App() {
     const [transactions, setTransactions] = useState(new Array<ITransaction>());
 
     useEffect(() => {
-        api.get('/transactions').then((LocalTransactions: AxiosResponse<Array<ITransaction>>) => {
-            const {data} = LocalTransactions
-            setTransactions(data)
-        }).catch((err) => {
-            console.error(err)
-            alert('Error loading data')
-        })
+        // api.get('/transactions')
+        //     .then((LocalTransactions: AxiosResponse<Array<ITransaction>>) => {
+        //         const {data} = LocalTransactions
+        //         setTransactions(data)
+        //     })
+        //     .catch((err) => {
+        //         console.error(err)
+        //         alert('Error loading data')
+        //     })
     }, []);
+
+    const add = (transaction: ITransaction) => {
+        api.post('/transactions', transaction)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.error(err)
+                alert('')
+            })
+    }
 
     return (
         <section className={'container mx-auto flex flex-col'}>
-            <NavBar/>
+            <NavBar onClick={add}/>
             <Totals transactions={transactions}/>
             <div className="flex overflow-y-auto flex-col flex-1 ">
-            {transactions.map((transaction: ITransaction, idx: number) => <Transaction transaction={transaction}/>)}
+                {transactions.map((transaction: ITransaction, idx: number) => <Transaction
+                    key={idx} transaction={transaction}/>)}
             </div>
 
         </section>

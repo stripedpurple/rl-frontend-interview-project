@@ -1,12 +1,17 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
+import {ITransaction} from "../models/transaction";
 
 interface OwnProps {
-    onClick(): void
+    onClick(transaction:ITransaction): any | void
 }
 
 type Props = OwnProps;
 
 const NavBar: FunctionComponent<Props> = ({onClick}) => {
+    const [localTransaction, setLocalTransaction] = useState({} as ITransaction);
+    const handleSubmit = () => {
+        setLocalTransaction({description: '', expense: 0})
+    }
 
     return (
 
@@ -14,6 +19,7 @@ const NavBar: FunctionComponent<Props> = ({onClick}) => {
 
                     <input name={'description'} type="text" placeholder="Description" className="w-full input input-primary input-bordered mr-2"/>
                     <input name={'expense'} type="text" placeholder="Expense" className="w-full input input-primary input-bordered mr-2"/>
+    {/*// @ts-ignore*/}
                     <button className="btn btn-primary" onClick={onclick}>Add</button>
 
 

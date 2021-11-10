@@ -4,7 +4,7 @@ export interface ITransaction {
     description: string
 }
 
-export class Transaction {
+export class Transaction implements ITransaction{
     id?: number = undefined
     expense: number | string = 0
     description: string = ''
@@ -13,4 +13,3 @@ export class Transaction {
         Object.assign(this, transaction)
     }
 }
-
