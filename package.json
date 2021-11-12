@@ -9,8 +9,11 @@
     "api": "json-server db-generator.js --port 3001"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "decimal.js": "^10.3.1",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-toastify": "^8.1.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

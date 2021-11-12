@@ -1,42 +1,22 @@
-import { useState } from 'react'
-import logo from './logo.svg'
+// import logo from './logo.svg'
 import './App.css'
+import ExpenseContainer from './ui/ExpenseContainer'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logo from './crypto_spin_2.gif'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+ 
   return (
     <div className="App">
+        
       <header className="App-header">
+        
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <p>Expense Tracker</p>
+        <br/>
+        <ExpenseContainer/>
+        <ToastContainer />
       </header>
     </div>
   )
