@@ -19,7 +19,7 @@ function NewTransactionForm() {
                 description: desc,
                 expense: expense
             }, function() {
-                alert('Transaction added.');
+                alert('LineItem added.');
             });
         }
         else {
@@ -50,7 +50,7 @@ function NewTransactionForm() {
                 }}/>
             </div>
             <div className="newTransactionForm_input">
-                <ButtonInput text='Submit Transaction' callback={handleOnSubmit}/>
+                <ButtonInput text='Submit LineItem' callback={handleOnSubmit}/>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import Amount from './Amount'
 
-function Transaction(props: { price: string; label: string; }) {
+function LineItem(props: { price: string; label: string; }) {
     const price = props.price || 0.00;
     const label = props.label || '';
 
@@ -11,4 +11,4 @@ function Transaction(props: { price: string; label: string; }) {
         </div>
     )
 }
-export default Transaction
+export default LineItem

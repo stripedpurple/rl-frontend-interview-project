@@ -1,12 +1,13 @@
-import {CElement, ReactComponentElement, useState, useEffect} from 'react'
-import db, {transaction_record} from '../api/db'
+import {ReactComponentElement, useState, useEffect} from 'react'
+import db from '../api/db'
 import Total from './Total'
-import Transaction from './Transaction'
-import Toggle from "./Toggle";
-import NewTransactionForm from "./NewTransactionForm";
+import LineItem from './LineItem'
+import Toggle from "./Toggle"
+import NewTransactionForm from "./NewTransactionForm"
+import {Transaction, transaction} from "../models/Transaction"
 
 function Logger() {
-    const defaultLocalTransactionValue: transaction_record[] = [];
+    const defaultLocalTransactionValue: transaction[] = [];
     const [localTransactions, setLocalTransactions] = useState(defaultLocalTransactionValue);
     const [total, setTotal] = useState(0.00);
     const [spent, setSpent] = useState(0.00);
@@ -14,12 +15,12 @@ function Logger() {
     const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
-        db.getTransactions(function(transactions: transaction_record[]) {
+        db.getTransactions(function(transactions: transaction[]) {
 
             // Calculate total, spent, and earned.
             let total = 0; let spent = 0; let earned = 0;
             for (let idx = 0; idx < transactions.length; idx++) {
-                let log_item = transactions[idx];
+                let log_item = new Transaction(transactions[idx]);
                 let price = +log_item.expense;
                 if (isFinite(price)) {
                     total += price;
@@ -46,10 +47,10 @@ function Logger() {
 
     const renderTransactions = () => {
         let content: any[] = localTransactions.map(
-            function(i: transaction_record): ReactComponentElement<any> {
+            function(i: transaction): ReactComponentElement<any> {
                 const {id, description, expense} = i;
                 let transaction_element: ReactComponentElement<any> = (
-                    <Transaction key={description + id.toString()} label={description} price={expense}/>
+                    <LineItem key={description} label={description} price={expense.toString()}/>
                 );
                 return (transaction_element);
             }
