@@ -9,9 +9,11 @@ import {Transaction, transaction} from "../models/Transaction"
 function Logger() {
     const defaultLocalTransactionValue: transaction[] = [];
     const [localTransactions, setLocalTransactions] = useState(defaultLocalTransactionValue);
-    const [total, setTotal] = useState(0.00);
-    const [spent, setSpent] = useState(0.00);
-    const [earned, setEarned] = useState(0.00);
+    const [total, setTotal] = useState({
+        all: 0,
+        earned: 0,
+        spent: 0
+    });
     const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
@@ -34,9 +36,11 @@ function Logger() {
             }
 
             setLocalTransactions([...transactions]);
-            setTotal(total);
-            setSpent(spent);
-            setEarned(earned);
+            setTotal({
+                all: total,
+                spent: spent,
+                earned: earned
+            });
         });
     });
 
@@ -69,13 +73,13 @@ function Logger() {
     <div className="logger">
         <div className="logger_header">
             <div className="logger_header_overall">
-                <Total big={true} amount={total} />
+                <Total big={true} amount={total.all} />
             </div>
             <div className="logger_header_snippet">
-                <Total label={'earned'} amount={earned} />
+                <Total label={'earned'} amount={total.earned} />
             </div>
             <div className="logger_header_snippet">
-                <Total label={'spent'} amount={spent} />
+                <Total label={'spent'} amount={total.spent} />
             </div>
         </div>
         <div className="logger_body">
