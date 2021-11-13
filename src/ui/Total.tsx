@@ -35,8 +35,9 @@ function Total(prop:prop) {
     }, [calculate]);
 
     return (<div>
-            Total: {total},
-            deposited:{deposited}, withdraw:{withdraw}
+            Total: ${total}
+            <br/>
+            Deposited:${deposited} Withdrawn:${withdraw}
         </div>);
   }
 

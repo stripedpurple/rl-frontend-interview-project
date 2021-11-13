@@ -36,13 +36,14 @@ useEffect(() => {
         <div>
             <Total Transactions={Transactions} ></Total>
             {/* <button> add record</button> */}
-            <SubmitExpense></SubmitExpense>
+            <SubmitExpense Transaction={undefined}></SubmitExpense>
             {
                 Transactions.map((value, index)=>{
-                    // console.log(value, index);
-                    return(<ul>
-                      <TransactionRecord Transaction = {value}></TransactionRecord>
-                      </ul>)
+                    return(
+                    <ul key={index}>
+                      <TransactionRecord Transaction = {value}/>
+                    </ul>
+                    )
 
                     
                 })

@@ -7,7 +7,7 @@ interface prop{
 function TransactionRecord(prop:prop) {
 
     return (<div>
-            {prop.Transaction.description}, ${prop.Transaction.expense}
+            {prop.Transaction.description} - ${prop.Transaction.expense}
         </div>);
   }
 
