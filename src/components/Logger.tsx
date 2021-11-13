@@ -1,4 +1,4 @@
-import {CElement, ReactComponentElement, useState} from 'react'
+import {CElement, ReactComponentElement, useState, useEffect} from 'react'
 import db, {transaction_record} from '../api/db'
 import Total from './Total'
 import Transaction from './Transaction'
@@ -6,44 +6,46 @@ import Toggle from "./Toggle";
 import NewTransactionForm from "./NewTransactionForm";
 
 function Logger() {
-    let defaultT: transaction_record[] = [];
-    let [t, setT] = useState(defaultT);
-    let [total, setTotal] = useState(0.00);
-    let [spent, setSpent] = useState(0.00);
-    let [earned, setEarned] = useState(0.00);
-    let [showForm, setShowForm] = useState(false);
+    const defaultLocalTransactionValue: transaction_record[] = [];
+    const [localTransactions, setLocalTransactions] = useState(defaultLocalTransactionValue);
+    const [total, setTotal] = useState(0.00);
+    const [spent, setSpent] = useState(0.00);
+    const [earned, setEarned] = useState(0.00);
+    const [showForm, setShowForm] = useState(false);
 
-    db.getTransactions(function(transactions: transaction_record[]) {
+    useEffect(() => {
+        db.getTransactions(function(transactions: transaction_record[]) {
 
-        // Calculate total, spent, and earned.
-        let total = 0; spent = 0; earned = 0;
-        for (let idx = 0; idx < transactions.length; idx++) {
-            let log_item = transactions[idx];
-            let price = +log_item.expense;
-            if (isFinite(price)) {
-                total += price;
+            // Calculate total, spent, and earned.
+            let total = 0; let spent = 0; let earned = 0;
+            for (let idx = 0; idx < transactions.length; idx++) {
+                let log_item = transactions[idx];
+                let price = +log_item.expense;
+                if (isFinite(price)) {
+                    total += price;
 
-                if (price < 0) {
-                    spent = spent + price;
+                    if (price < 0) {
+                        spent = spent + price;
+                    }
+                    else if (price > 0)
+                        earned += price;
                 }
-                else if (price > 0)
-                    earned += price;
             }
-        }
 
-        setT([...transactions]);
-        setTotal(total);
-        setSpent(spent);
-        setEarned(earned);
+            setLocalTransactions([...transactions]);
+            setTotal(total);
+            setSpent(spent);
+            setEarned(earned);
+        });
     });
 
     const handleFormShow = (value: number) => {
-        let showForm = (value) ? true : false;
+        let showForm = !!(value);
         setShowForm(showForm);
     }
 
     const renderTransactions = () => {
-        let content: any[] = t.map(
+        let content: any[] = localTransactions.map(
             function(i: transaction_record): ReactComponentElement<any> {
                 const {id, description, expense} = i;
                 let transaction_element: ReactComponentElement<any> = (
