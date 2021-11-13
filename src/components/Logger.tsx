@@ -7,22 +7,21 @@ import NewTransactionForm from "./NewTransactionForm"
 import {Transaction, transaction} from "../models/Transaction"
 
 function Logger() {
-    const defaultLocalTransactionValue: transaction[] = [];
-    const [localTransactions, setLocalTransactions] = useState(defaultLocalTransactionValue);
+    const [localTransactions, setLocalTransactions] = useState([] as transaction[]);
+    const [showForm, setShowForm] = useState(false);
     const [total, setTotal] = useState({
         all: 0,
         earned: 0,
         spent: 0
     });
-    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
-        db.getTransactions(function(transactions: transaction[]) {
+        db.getTransactions(function(tempTransactions: transaction[]) {
 
             // Calculate total, spent, and earned.
             let total = 0; let spent = 0; let earned = 0;
-            for (let idx = 0; idx < transactions.length; idx++) {
-                let log_item = new Transaction(transactions[idx]);
+            for (let idx = 0; idx < tempTransactions.length; idx++) {
+                let log_item = new Transaction(tempTransactions[idx]);
                 let price = +log_item.expense;
                 if (isFinite(price)) {
                     total += price;
@@ -34,12 +33,11 @@ function Logger() {
                         earned += price;
                 }
             }
-
-            setLocalTransactions([...transactions]);
+            setLocalTransactions([...tempTransactions]);
             setTotal({
-                all: total,
-                spent: spent,
-                earned: earned
+                all: +total.toFixed(2),
+                spent: +spent.toFixed(2),
+                earned: +earned.toFixed(2)
             });
         });
     });
@@ -54,7 +52,7 @@ function Logger() {
             function(i: transaction): ReactComponentElement<any> {
                 const {id, description, expense} = i;
                 let transaction_element: ReactComponentElement<any> = (
-                    <LineItem key={description} label={description} price={expense.toString()}/>
+                    <LineItem key={description + id} label={description} price={expense.toString()}/>
                 );
                 return (transaction_element);
             }
@@ -66,7 +64,6 @@ function Logger() {
         let showFormClass = (showForm) ? ' show' : '';
         return (<div className={"logger_form" + showFormClass}>{content}</div>)
     }
-
 
     let openClose = (showForm) ? '-' : '+';
   return (

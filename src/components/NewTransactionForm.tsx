@@ -50,7 +50,7 @@ function NewTransactionForm() {
                 }}/>
             </div>
             <div className="newTransactionForm_input">
-                <ButtonInput text='Submit LineItem' callback={handleOnSubmit}/>
+                <ButtonInput text='Submit Transaction' callback={handleOnSubmit}/>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import Amount from "./Amount";
+import Dollars from "./Dollars";
 
 function Total(props: { amount: number; label?: string; big?: boolean}) {
     let amount = props.amount;
@@ -11,7 +11,7 @@ function Total(props: { amount: number; label?: string; big?: boolean}) {
 
     return (
         <div className={"total" + bigClass}>
-            <div className="total_amount"><Amount amount={amount} color={true}/></div>
+            <div className="total_amount"><Dollars amount={amount} color={true}/></div>
             <div className="total_label">{label}</div>
         </div>
     )
