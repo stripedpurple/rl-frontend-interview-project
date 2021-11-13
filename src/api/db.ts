@@ -1,8 +1,10 @@
+import {transaction} from "../models/Transaction"
+
 let __loadedTransactions = false;
 const db: { cache: {[key: string]: any}; getTransactions: Function; setTransactions: Function; request: Function; } = {
     cache: {},
 
-    getTransactions: function(callback: (transactions: transaction_record[]) => any): void {
+    getTransactions: function(callback: (transactions: transaction[]) => any): void {
         if (__loadedTransactions)
             return
 
@@ -11,7 +13,7 @@ const db: { cache: {[key: string]: any}; getTransactions: Function; setTransacti
 
             const key: string = 'transactions';
             const status: number = xhr.status;
-            let transactions: transaction_record[] = [];
+            let transactions: transaction[] = [];
             switch (status) {
                 case 200:
                     const response: string = xhr.response;
@@ -36,7 +38,7 @@ const db: { cache: {[key: string]: any}; getTransactions: Function; setTransacti
         });
     },
 
-    setTransactions: function(value: transaction_record, callback: (status: number) => any) {
+    setTransactions: function(value: transaction, callback: (status: number) => any) {
         if (value && value.description.replace(/\s/g, '').length > 0 && isFinite(+value.expense)) {
             let endpoint: string = 'transactions';
             db.request('POST', endpoint, JSON.stringify(value), function(xhr: XMLHttpRequest) {
@@ -69,9 +71,3 @@ const db: { cache: {[key: string]: any}; getTransactions: Function; setTransacti
             xhr.send();
     }
 }; export default db;
-
-export interface transaction_record {
-    id: number;
-    description: string;
-    expense: string;
-}
