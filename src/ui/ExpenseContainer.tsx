@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Total from "./Total";
 import TransactionRecord from "./TransactionRecord";
-import SubmitExpense from "../form/SubmitExpense";
+import SubmitExpense from "./SubmitExpense";
 
 import {Transaction} from '../models/Transaction';
 import axios from "axios";
@@ -13,30 +13,26 @@ const [Transactions, setTransactions] =useState<Transaction[]>([])
 
 
 
-const asd = ()=>{
+const PullTransaction = ()=>{
   axios({
     method: 'get',
     url: 'http://localhost:3001/transactions',
     responseType: 'json'
   })
-    .then(function (response) {
-      console.log("response")
-      console.log(response)
-      // return response.data;
+    .then( (response) => {
       setTransactions(response.data)
-      
     });
 }
 
 useEffect(() => {
-    asd();
+    PullTransaction();
   }, []);
 
     return (
         <div>
             <Total Transactions={Transactions} ></Total>
-            {/* <button> add record</button> */}
-            <SubmitExpense Transaction={undefined}></SubmitExpense>
+            <SubmitExpense onChange={(e:Transaction) => setTransactions([...Transactions, e])}></SubmitExpense>
+            <br/>
             {
                 Transactions.map((value, index)=>{
                     return(

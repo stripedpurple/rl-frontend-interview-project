@@ -37,7 +37,7 @@ function Total(prop:prop) {
     return (<div>
             Total: ${total}
             <br/>
-            Deposited:${deposited} Withdrawn:${withdraw}
+            Deposited:${deposited} | Withdrawn:${withdraw}
         </div>);
   }
 
