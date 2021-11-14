@@ -1,11 +1,10 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import db from "./api/DB2";
+import db from "./api/db";
 import {Transaction, ITransaction} from "./models/Transaction";
 import {Totals, ITotals} from './models/Totals'
 import TotalBar from "./components/TotalBar";
 import TransactionLog from "./components/TransactionLog";
 import Toggle from "./components/Toggle";
-import ButtonInput from "./components/ButtonInput";
 
 interface OwnProps {} type Props = OwnProps;
 
@@ -77,7 +76,7 @@ const App: FunctionComponent<Props> = () => {
                     <div className="inputField_label">Price</div>
                     <input className="inputField_value" name={'expense'} type={'text'} onChange={handleInputOnChange} value={newTransaction.expense}></input>
                 </label>
-                <ButtonInput text='Submit Transaction' callback={handleOnSubmit}/>
+                <button onClick={handleOnSubmit}>Submit Transaction</button>
             </div>
             <div className="logger_addNew">
                 <Toggle callback={(value) => handleToggle(value)} element={
