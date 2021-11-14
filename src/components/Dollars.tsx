@@ -6,6 +6,8 @@ function Dollars(props: { amount: number; color?: boolean}) {
 
     useEffect(() => {
         setAmount(props.amount);
+        if (props.color)
+            setEnableColor(props.color);
     });
 
     let dollars = Math.abs(amount).toFixed(2);

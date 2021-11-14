@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './styles/App.css'
-import Logger from './components/Logger'
+import App from './app'
+import './styles/app.css'
 
 ReactDOM.render(
-    <Logger />,
+    <App />,
     document.getElementById('root')
 )
