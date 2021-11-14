@@ -17,7 +17,7 @@ function Total(prop:prop) {
         let tempWithdraw = new Decimal(0.0);
 
         prop.Transactions.map((val, indx)=>{
-            if(val.expense>0){
+            if(parseInt(val.expense)>0){
                 tempDeposit= Decimal.sum(tempDeposit, val.expense)
             }
             else{
