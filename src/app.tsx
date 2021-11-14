@@ -70,11 +70,11 @@ const App: FunctionComponent<Props> = () => {
             <div className={(showForm) ? 'logger_form show' : 'logger_form'}>
                 <label className="inputField">
                     <div className="inputField_label">Description</div>
-                    <input className="inputField_value" name={'description'} type={'text'} onChange={handleInputOnChange} value={newTransaction.description}></input>
+                    <input className="inputField_value" name={'description'} type={'text'} onChange={handleInputOnChange} value={newTransaction.description}/>
                 </label>
                 <label className="inputField">
                     <div className="inputField_label">Price</div>
-                    <input className="inputField_value" name={'expense'} type={'text'} onChange={handleInputOnChange} value={newTransaction.expense}></input>
+                    <input className="inputField_value" name={'expense'} type={'text'} onChange={handleInputOnChange} value={newTransaction.expense} />
                 </label>
                 <button onClick={handleOnSubmit}>Submit Transaction</button>
             </div>
