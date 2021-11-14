@@ -3,7 +3,7 @@ import './App.css'
 import ExpenseContainer from './ui/ExpenseContainer'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from './crypto_spin_2.gif'
+import logo from './assets/crypto_spin_2.gif'
 
 function App() {
  

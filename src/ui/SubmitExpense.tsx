@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import React from "react";
-import wowSound from "../static/wow.mp3";
-import sadSound from "../static/Saaaaaad.mp3";
+import wowSound from "../assets/wow.mp3";
+import sadSound from "../assets/Saaaaaad.mp3";
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -26,19 +26,19 @@ function SubmitExpense(prop:prop) {
   const onSubmit: SubmitHandler<Transaction> = data => saveData(data);
 
     const saveData = (data:Transaction) =>{
-
-      let a = data;
-      a.expense = a.expense.toString()
+      //we do this because data doesnt want to be a string
+      let tempData = data;
+      tempData.expense = tempData.expense.toString()
         // Send a POST request
         axios({
             method: 'post',
             url: 'http://localhost:3001/transactions',
-            data: a
+            data: tempData
             
         }).then(function (response) {
             
             
-            if(parseFloat(a.expense)>0){
+            if(parseFloat(tempData.expense)>0){
               var wow = new Audio(wowSound); // buffers automatically when created
               wow.play();
               toast("WOW!!!!!!")
